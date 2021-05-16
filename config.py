@@ -11,7 +11,7 @@ weight_decay = 0.1
 image_height = 32
 image_width = 32
 
-patch_size = 8
+patch_size = 16
 
 embedding_dims = patch_size*patch_size*3
 dropout = 0.1
