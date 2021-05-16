@@ -131,7 +131,6 @@ class ViT(nn.Module):
 
 
     def forward(self, patches):
-        print(patches.shape)
         x = self.cls_embedding.expand(patches.shape[0], -1, -1)
         patch_embeddings = self.patch_embeddings(patches)
         x = torch.cat((x, patch_embeddings), dim=1) + self.postional_embedding
