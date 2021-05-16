@@ -50,15 +50,17 @@ def run():
         batch_size=config.Batch_Size
     )
 
-    model = ImageTransformer.ImageTransformer(
-        embedding_dims = config.embedding_dims,
-        dropout = config.dropout,
-        heads = config.heads,
-        num_layers = config.num_layers,
-        forward_expansion = config.forward_expansion,
-        max_len = config.max_len,
-        layer_norm_eps = config.layer_norm_eps,
-        num_classes = config.num_classes,
+    model = ImageTransformer.ViT(
+        patch_height = 16,
+        patch_width = 16,
+        embedding_dims = 768,
+        dropout = 0.1,
+        heads = 4,
+        num_layers = 4,
+        forward_expansion = 4,
+        max_len = int((32*32)/(16*16)),
+        layer_norm_eps = 1e-5,
+        num_classes = 10,
     )
     
     if torch.cuda.is_available():
