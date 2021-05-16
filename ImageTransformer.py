@@ -130,17 +130,8 @@ class ViT(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
 
-    def forward(self, images):
-        patches = images.unfold(2, self.patch_height, self.patch_width).unfold(3, self.patch_height, self.patch_width)
-        patches = patches.permute(0, 2, 3, 1, 4, 5)
-        patches = patches.reshape(
-            patches.shape[0],
-            patches.shape[1],
-            patches.shape[2],
-            patches.shape[3]*patches.shape[4]*patches.shape[5]
-        )
-        patches = patches.view(patches.shape[0], -1, patches.shape[-1])
-
+    def forward(self, patches):
+        print(patches.shape)
         x = self.cls_embedding.expand(patches.shape[0], -1, -1)
         patch_embeddings = self.patch_embeddings(patches)
         x = torch.cat((x, patch_embeddings), dim=1) + self.postional_embedding
@@ -169,6 +160,15 @@ if __name__ == "__main__":
         num_classes = 10,
     )
 
-    a = torch.randn(32, 3, 32, 32)
-    output = model(a)
-    print(output.shape)
+    patches = torch.randn(32, 3, 32, 32)
+    patches = patches.unfold(2, 16, 16).unfold(3, 16, 16)
+    patches = patches.permute(0, 2, 3, 1, 4, 5)
+    patches = patches.reshape(
+        patches.shape[0],
+        patches.shape[1],
+        patches.shape[2],
+        patches.shape[3]*patches.shape[4]*patches.shape[5]
+    )
+    patches = patches.view(patches.shape[0], -1, patches.shape[-1])    
+    output = model(patches)
+    # print(output.shape)
