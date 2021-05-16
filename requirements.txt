@@ -1,5 +1,6 @@
 numpy
 Pillow
 tqdm
-albumentation
+albumentations
+transformers
 torch
