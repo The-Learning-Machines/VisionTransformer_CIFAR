@@ -36,3 +36,9 @@ The ViT took about __ minutes to train on CIFAR-10 dataset. Without any prior pr
 7) Epochs Trained          : 80
 8) Training Time           : 12 minutes
 </pre>
+
+## TODO
+
+- Test on nth-Order Runge Kutta residuals
+
+
